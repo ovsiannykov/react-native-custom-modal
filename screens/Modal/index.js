@@ -1,8 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Animated, TouchableOpacity} from 'react-native';
+import {View, Text, Animated, TouchableOpacity, FlatList} from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 import styles from './styles';
+import {arrayData} from '../../data/array';
+
+const Item = ({title}) => (
+  <View style={styles.item}>
+    <Text style={styles.itemTitle}>{title}</Text>
+  </View>
+);
 
 const Modal = ({navigation}) => {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -26,17 +33,25 @@ const Modal = ({navigation}) => {
     navigation.goBack();
   };
 
+  const renderItem = ({item}) => <Item title={item} />;
+
   return (
-    <View s style={styles.screen}>
+    <GestureRecognizer style={styles.screen} onSwipeDown={closeHandler}>
       <Animated.View style={{opacity: fadeAnim, ...styles.modal}} />
 
-      <GestureRecognizer style={styles.modalContent} onSwipeDown={closeHandler}>
-        <Text style={styles.title}>Modal Content</Text>
+      <View style={styles.modalContent}>
+        <GestureRecognizer>
+          <Text style={styles.title}>Modal Content</Text>
+        </GestureRecognizer>
         <TouchableOpacity style={styles.closeButton} onPress={closeHandler}>
           <Text style={styles.closeButtonText}>Close</Text>
         </TouchableOpacity>
-      </GestureRecognizer>
-    </View>
+
+        <View style={{width: '100%'}}>
+          <FlatList data={arrayData} renderItem={renderItem} />
+        </View>
+      </View>
+    </GestureRecognizer>
   );
 };
 

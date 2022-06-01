@@ -17,11 +17,11 @@ export default StyleSheet.create({
     //justifyContent: 'center',
   },
   title: {
-    marginTop: 100,
+    marginTop: 40,
     fontSize: 32,
     color: 'white',
     fontWeight: '800',
-    marginBottom: 60,
+    marginBottom: 20,
   },
   closeButton: {
     backgroundColor: 'white',
@@ -35,5 +35,13 @@ export default StyleSheet.create({
     color: 'blue',
     fontSize: 16,
     fontWeight: '700',
+  },
+  itemTitle: {
+    color: 'white',
+  },
+  item: {
+    marginVertical: 10,
+    width: '100%',
+    alignItems: 'center',
   },
 });
